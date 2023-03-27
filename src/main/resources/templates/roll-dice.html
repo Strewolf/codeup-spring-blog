@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Roll Dice</title>
+</head>
+<body>
+<h1>Roll the Dice</h1>
+<!--<p>Guess a number:</p>-->
+<!--<form method="get">-->
+<!--  <input type="number" name="guess" min="1" max="6" required>-->
+<!--  <br><br>-->
+<!--  <button type="submit">Roll</button>-->
+<!--</form>-->
+<!--<br>-->
+<!--<p>or</p>-->
+<p>Choose a number:</p>
+<ul>
+  <li><a th:href="@{/roll-dice/n?guess=1}">1</a></li>
+  <li><a  th:href="@{/roll-dice/n?guess= 2}">2</a></li>
+  <li><a  th:href="@{/roll-dice/n?guess= 3}">3</a></li>
+  <li><a  th:href="@{/roll-dice/n?guess= 4}">4</a></li>
+  <li><a  th:href="@{/roll-dice/n?guess= 5}">5</a></li>
+  <li><a  th:href="@{/roll-dice/n?guess= 6}">6</a></li>
+</ul>
+</body>
+</html>
