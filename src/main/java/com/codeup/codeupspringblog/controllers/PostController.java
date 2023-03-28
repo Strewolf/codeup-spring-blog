@@ -16,8 +16,8 @@ public class PostController<post> {
     public String returnPost(Model model){
         List<Post> posts = new ArrayList<>(Arrays.asList(
 
-        new Post("post title 1", "post body 1"),
-        new Post("post title 2", "post body 2")
+        new Post(1,"post title 1", "post body 1"),
+        new Post(2,"post title 2", "post body 2")
         ));
 
         model.addAttribute("posts", posts);
