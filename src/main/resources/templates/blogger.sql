@@ -1,3 +1,3 @@
 use blogger;
 
-describe blogs;
+select * from  blogs;

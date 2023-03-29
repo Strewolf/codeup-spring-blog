@@ -1,6 +1,7 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.model.Post;
+import com.codeup.codeupspringblog.repositories.BlogRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,92 +11,35 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-public class PostController<post> {
-
+public class PostController {
+    private final BlogRepository adDao;
+    public PostController(BlogRepository adDao) {
+        this.adDao = adDao;
+    }
     @GetMapping("/posts")
     public String returnPost(Model model){
-        List<Post> posts = new ArrayList<>(Arrays.asList(
-
-        new Post(1,"post title 1", "post body 1"),
-        new Post(2,"post title 2", "post body 2")
-        ));
-
-        model.addAttribute("posts", posts);
+        model.addAttribute("blogs", adDao.findAll());
         return "Posts/index";
     }
-
     @GetMapping("/posts/{id}")
-    public String show(@PathVariable long id, Model model) {
-        Post post = new Post((int) id, "Post Title", "Post body");
-        model.addAttribute("post",post);
+    public String showPost(@PathVariable("id") Long id, Model model) {
+        adDao.findById(id).ifPresent(post -> model.addAttribute("blog", post));
+        if (!model.containsAttribute("blog")) {
+            return "error/404"; // Replace with your 404 error page template
+        }
         return "Posts/show";
     }
 
     @GetMapping("/posts/create")
-    public String returnPostcreateForm() {
-        return "posts/create";
+    public String returnPostcreateForm(Model model) {
+        model.addAttribute("post", new Post());
+        return "Posts/create";
     }
 
-    @PostMapping("/post/create")
-    public String createpost() {
-        // Logic to create a new post
-        return "redirect:/post/index";
+    @PostMapping("/posts/create")
+    public String createpost(@ModelAttribute Post post) {
+        adDao.save(post);
+        return "redirect:/posts";
     }
+
 }
-
-
-//    @GetMapping("/posts")
-//    @ResponseBody
-//    public String returnPost(){
-//        return "index";
-//    }
-//
-//    @GetMapping("/posts/{id}")
-//    @ResponseBody
-//    public String show(@PathVariable long id) {
-//        return "index" + id;
-//    }
-//
-//    @GetMapping("/posts/create")
-//    @ResponseBody
-//    public String returnPostcreateForm() {
-//        return "viewing post create form";
-//    }
-//
-//    @PostMapping("/post/create")
-//    public String createpost() {
-//        // Logic to create a new post
-//        return "creating post....";
-//    }
-//}
-//
-
-
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.*;
-//
-//@Controller
-//@RequestMapping("/posts")
-//public class PostController {
-//
-//    @GetMapping("")
-//    public String index() {
-//        return "viewing post";
-//    }
-//
-//    @GetMapping("/{id}")
-//    public String show(@PathVariable long id) {
-//        return "posts/show";
-//    }
-//
-//    @GetMapping("/create")
-//    public String createForm() {
-//        return "posts/create";
-//    }
-//
-//    @PostMapping("/create")
-//    public String create() {
-//        // Logic to create a new post
-//        return "redirect:/posts";
-//    }
-//}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="partials/header :: header">
+  <meta charset="UTF-8">
+  <title>Create Post</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div>
+  <h1>Create a New Post</h1>
+  <form th:method="post" th:action="@{/posts/create}" th:object="${post}">
+    <label for="title">Title:</label>
+    <input type="text" id="title" th:field="*{title}" required>
+    <br>
+    <label for="body">Body:</label>
+    <textarea id="body" th:field="*{body}" rows="5" required></textarea>
+    <br>
+    <input type="submit" value="Create Post">
+  </form>
+</div>
+</body>
+</html>
