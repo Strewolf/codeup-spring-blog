@@ -35,7 +35,7 @@ public class PostController {
         if (!model.containsAttribute("blog")) {
             return "error/404"; // Replace with your 404 error page template
         }
-        return "Posts/show";
+        return "redirect:Posts/show";
     }
     @GetMapping("/posts/{id}/edit")
     public String EditPost(@PathVariable("id") Long id, Model model) {
