@@ -42,18 +42,18 @@ public class SecurityConfiguration {
                 /* Logout configuration */
                 .and()
                 .logout()
-                .logoutSuccessUrl("/") // append a query string value
+                .logoutSuccessUrl("/posts") // append a query string value
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/ads", "/ads/{id}") // anyone can see the home and the ads pages
+                .requestMatchers("/", "/posts", "/posts/{id}","/sign-up") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/ads/create", // only authenticated users can create ads
-                        "/ads/{id}/edit" // only authenticated users can edit ads
+                        "/posts/create", // only authenticated users can create ads
+                        "/posts/{id}/edit" // only authenticated users can edit ads
                 )
                 .authenticated()
         ;
