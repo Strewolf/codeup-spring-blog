@@ -7,11 +7,10 @@
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
 <div th:each="blog : ${blogs}">
-    <a th:href="@{/posts/{id}(id=${blog.id})}"><h1 th:text="${blog.title}"></h1></a>
+    <a th:href="@{/posts/{id}(id=${blog.id})}"><h2 th:text="${blog.title}"></h2></a>
     <p th:text="${blog.body}"></p>
+    <a th:href="@{/posts/{id}/edit(id=${blog.id})}" class="edit-button">Edit</a>
+</div>
     </div>
-<!--<div th:each="blog : ${blogs}">-->
-<!--    <div th:replace="partials/post-card :: blog(${blogs})"></div>-->
-<!--</div>-->
 </body>
 </html>

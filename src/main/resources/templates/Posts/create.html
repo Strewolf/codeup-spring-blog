@@ -1,22 +1,33 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="partials/header :: header">
   <meta charset="UTF-8">
   <title>Create Post</title>
+  <!-- Add Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <nav th:replace="partials/navbar :: navbar"></nav>
-<div>
-  <h1>Create a New Post</h1>
-  <form th:method="post" th:action="@{/posts/create}" th:object="${post}">
-    <label for="title">Title:</label>
-    <input type="text" id="title" th:field="*{title}" required>
-    <br>
-    <label for="body">Body:</label>
-    <textarea id="body" th:field="*{body}" rows="5" required></textarea>
-    <br>
-    <input type="submit" value="Create Post">
+
+<div class="container">
+  <form action="#" th:action="@{/posts/create}" th:object="${post}" method="post">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title:</label>
+      <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
+    </div>
+    <div class="mb-3">
+      <label for="body" class="form-label">Body:</label>
+      <textarea class="form-control" id="body" name="body" th:field="*{body}" required></textarea>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </form>
 </div>
+
+<!-- Add Bootstrap JS and its dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

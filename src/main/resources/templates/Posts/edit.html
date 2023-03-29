@@ -1,0 +1,92 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Edit Post</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<h1>Edit Post</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;<form action="#" th:action="@{/posts/{id}(id=${blog.id})/edit}" th:object="${blog}" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="hidden" th:field="*{id}">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="title">Title:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="text" id="title" th:field="*{title}">&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="body">Body:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <textarea id="body" rows="10" cols="30" th:field="*{body}"></textarea>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button type="submit">Save</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;<a th:href="@{/posts}">Back to Posts</a>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head th:replace="partials/header :: header">-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Create Post</title>-->
+<!--    &lt;!&ndash; Add Bootstrap CSS &ndash;&gt;-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav th:replace="partials/navbar :: navbar"></nav>-->
+
+<!--<div class="container">-->
+<!--    <form action="#" th:action="@{/posts/{id}(id=${blog.id})/edit}" th:object="${blog}" method="post">-->
+
+
+<!--        <div class="mb-3">-->
+<!--            <label for="title" class="form-label">Title:</label>-->
+<!--            <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>-->
+<!--        </div>-->
+<!--        <div class="mb-3">-->
+<!--            <label for="body" class="form-label">Body:</label>-->
+<!--            <textarea class="form-control" id="body" name="body" th:field="*{body}" required></textarea>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Add Bootstrap JS and its dependencies &ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="partials/header :: header">
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="container">
+    <form th:action="@{/posts/{id}/edit(id=${blog.id})}" th:object="${blog}" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" th:field="*{title}" required>
+        </div>
+        <div class="mb-3">
+            <label for="body" class="form-label">Body:</label>
+            <textarea class="form-control" id="body" name="body" th:field="*{body}" required></textarea>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+<!-- Add Bootstrap JS and its dependencies--->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
