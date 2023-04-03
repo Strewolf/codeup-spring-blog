@@ -1,0 +1,52 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head th:replace="partials/header :: header">-->
+<!--  <meta charset="UTF-8" />-->
+<!--  <title>Profile</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav th:replace="partials/navbar :: navbar"></nav>-->
+<!--<h1>Profile</h1>-->
+<!--<p th:text="'Welcome, ' + ${user.username}"></p>-->
+<!--<div class="container">-->
+<!--<div class="row justify-content-center">-->
+<!--  <div class="col-md-8">-->
+<!--    <div th:each="blog : ${blogs}" class="post-container text-center">-->
+<!--      <a th:href="@{/posts/{id}(id=${user.id})}"><h3 th:text="${blog.title}"></h3></a>-->
+<!--      <p th:text="${blog.body}"></p>-->
+<!--      <a th:href="@{/posts/{id}/edit(id=${blog.id})}" class="edit-button btn btn-primary">Edit</a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{partials/header :: header}">
+  <meta charset="UTF-8" />
+  <title>Profile</title>
+</head>
+<body>
+<nav th:replace="~{partials/navbar :: navbar}"></nav>
+<h1>Profile</h1>
+<p th:text="'Welcome, ' + ${user.username}"></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2>Your Posts</h2>
+      <div th:each="post : ${userPosts}" class="post-container text-center">
+        <a th:href="@{/posts/{id}(id=${post.id})}"><h3 th:text="${post.title}"></h3></a>
+        <p th:text="${post.body}"></p>
+        <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="edit-button btn btn-primary">Edit</a>
+        <form method="post" th:action="@{/posts/{id}/delete(id=${post.id})}">
+          <input type="hidden" name="_method" value="delete" />
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

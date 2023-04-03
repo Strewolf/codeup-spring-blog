@@ -5,6 +5,8 @@ import com.codeup.codeupspringblog.model.Post;
 import com.codeup.codeupspringblog.model.User;
 import com.codeup.codeupspringblog.repositories.BlogRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +37,7 @@ public class PostController {
         if (!model.containsAttribute("blog")) {
             return "error/404"; // Replace with your 404 error page template
         }
-        return "redirect:Posts/show";
+        return "Posts/show";
     }
     @GetMapping("/posts/{id}/edit")
     public String EditPost(@PathVariable("id") Long id, Model model) {
@@ -53,19 +55,27 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post) {
-        User user = userDao.getOne(1L); // Replace with a valid user ID
-        post.setUser(user);
+    public String createPost(@ModelAttribute Post post, Authentication authentication) {
+        User loggedInUser = (User) authentication.getPrincipal();
+        post.setUser(loggedInUser);
         adDao.save(post);
         return "redirect:/posts";
     }
 
     @PostMapping("/posts/{id}/edit")
     public String saveEditedPost(@PathVariable("id") Long id, @ModelAttribute Post post) {
-        User user = userDao.getOne(1L); // Replace with a valid user ID
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName(); // Get the username of the logged-in user
+        User user = userDao.findByUsername(username); // Fetch the user object from the database using the username
+
         post.setUser(user);
         adDao.save(post);
         return "redirect:/posts";
+    }
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable("id") Long id) {
+        adDao.deleteById(id);
+        return "redirect:/profile";
     }
 
 }

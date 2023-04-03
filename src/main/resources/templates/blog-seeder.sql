@@ -5,9 +5,10 @@ INSERT INTO blogs(title, body,user_id) VALUES("this is my first title", "this is
 INSERT INTO users(email, password, username) VALUES("horacesmith26@gmail.com","lucky","lucky");
 
 select * from blogs;
+truncate TABLE  blogs;
 select * from users;
-
 DELETE from users;
+DELETE FROM users WHERE id = 1;
 
 
-
+describe users

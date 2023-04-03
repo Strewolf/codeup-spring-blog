@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<head th:replace="partials/header :: header">
+<head th:replace="~{partials/header :: header}">
     <meta charset="UTF-8">
     <title>view post</title>
 </head>
 <body>
-<nav th:replace="partials/navbar :: navbar"></nav>
+<nav th:replace="~{partials/navbar :: navbar}"></nav>
 <p>Created by: <span th:text="${blog.user.email}"></span></p>
 <p th:text="${blog.getTitle()}" ></p>
 <p th:text="${blog.getBody()}" ></p>
