@@ -18,22 +18,41 @@ public class EmailService {
     @Value("${spring.mail.from}")
     private String from;
 
-    public void prepareAndSend(Post post, String subject, String body) {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom(from);
-        User user = post.getUser();
-        if (user != null) {
-            msg.setTo(user.getEmail());
-            msg.setSubject(subject);
-            msg.setText(body);
+//    public void prepareAndSend(Post post, String title, String body) {
+//        SimpleMailMessage msg = new SimpleMailMessage();
+//        msg.setFrom(from);
+//        User user = post.getUser();
+//        if (user != null) {
+////            msg.setTo(user.getEmail());
+//            msg.setTo(user.getEmail());
+//            msg.setSubject(title);
+//            msg.setText(body);
+//
+//            try{
+//                this.emailSender.send(msg);
+//            }
+//            catch (MailException ex) {
+//                // simply log it and go on...
+//                System.err.println(ex.getMessage());
+//            }
+//        }
+//    }
+//}
+public void prepareAndSend(Post post) {
+    SimpleMailMessage msg = new SimpleMailMessage();
+    msg.setFrom(from);
+    User user = post.getUser();
+    if (user != null) {
+        msg.setTo(user.getEmail());
+        msg.setSubject(post.getTitle());
+        msg.setText(post.getBody());
 
-            try{
-                this.emailSender.send(msg);
-            }
-            catch (MailException ex) {
-                // simply log it and go on...
-                System.err.println(ex.getMessage());
-            }
+        try {
+            this.emailSender.send(msg);
+        } catch (MailException ex) {
+            // simply log it and go on...
+            System.err.println(ex.getMessage());
         }
     }
+}
 }

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Controller
 public class PostController {
     private final BlogRepository adDao;
@@ -25,7 +27,10 @@ public class PostController {
         this.emailService = emailService;
     }
 
-
+//   @GetMapping("/")
+//   public String welcome(){
+//        emailService.prepareAndSend( ,"test", "this is a test");
+//   }
     @GetMapping("/posts")
     public String returnPost(Model model){
         model.addAttribute("blogs", adDao.findAll());
@@ -59,6 +64,8 @@ public class PostController {
         User loggedInUser = (User) authentication.getPrincipal();
         post.setUser(loggedInUser);
         adDao.save(post);
+//        emailService.prepareAndSend(post, "Test Subject", "This is a test email.");
+        emailService.prepareAndSend(post);
         return "redirect:/posts";
     }
 
